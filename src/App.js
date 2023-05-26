@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// File: src/App.js
 
-function App() {
+import React, { useState } from 'react';
+import FileZone from './components/FileZone';
+import SettingsZone from './components/SettingsZone';
+import InfoZone from './components/InfoZone';
+import { CssBaseline, Box } from '@mui/material';
+
+const App = () => {
+  // We keep track of the currently selected file and its settings in state variables
+  const [currentFile, setCurrentFile] = useState(null);
+  const [fileSettings, setFileSettings] = useState({});
+
+  // This function will be called when a file is selected in the FileZone
+  const handleFileSelect = (file) => {
+    setCurrentFile(file);
+  };
+
+  // This function will be called when a setting is changed in the SettingsZone
+  const handleSettingsChange = (name, value) => {
+    setFileSettings({
+      ...fileSettings,
+      [name]: value,
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <FileZone onFileSelect={handleFileSelect} />
+      <SettingsZone currentFile={currentFile} onSettingsChange={handleSettingsChange} />
+      <InfoZone currentFile={currentFile} />
+    </Box>
   );
-}
+};
 
 export default App;
