@@ -36,7 +36,7 @@ const App = () => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <FileZone onFileSelect={handleFileSelect} onFileDelete={handleFileDelete} />
-      <SettingsZone currentFile={currentFile} onSettingsChange={handleSettingsChange} fileSettings={fileSettings[currentFile?.id] || {}} />
+      <SettingsZone key={currentFile?.id} currentFile={currentFile} onSettingsChange={handleSettingsChange} fileSettings={fileSettings[currentFile?.id] || {}} />
       <InfoZone currentFile={currentFile} />
     </Box>
   );
