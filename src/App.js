@@ -43,7 +43,7 @@ const App = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            File Manager
+            HoloMaker
           </Typography>
           <Button color="inherit">Download</Button>
         </Toolbar>
