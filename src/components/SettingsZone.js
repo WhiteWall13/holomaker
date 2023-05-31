@@ -6,10 +6,10 @@ const SettingsZone = ({ currentFile, onSettingsChange, fileSettings }) => {
     onSettingsChange(e.target.name, e.target.value);
   };
 
-  const settings = ['Size', 'Offset X', 'Offset Y', 'X Rotation','Y Rotation', 'Rotation Z', 'Title', 'Subtitle'];
+  const settings = ['Size', 'Offset X', 'Offset Y', 'X Rotation', 'Y Rotation', 'Rotation Z', 'Title', 'Subtitle'];
 
   return (
-    <Box sx={{ width: '33%', padding: '10px', borderRight: '1px solid grey' }}>
+    <Box sx={{ width: '33%', padding: '10px', borderRight: '1px solid grey', height: '600px', overflow: 'auto' }}>
       <h2>Settings</h2>
       {settings.map((setting) => (
         <TextField
@@ -19,7 +19,7 @@ const SettingsZone = ({ currentFile, onSettingsChange, fileSettings }) => {
           fullWidth
           margin="normal"
           name={setting}
-          value={fileSettings[setting] || ''} // Use the setting value for the current file, or an empty string if it's not set
+          value={fileSettings[setting] || ''}
           onChange={handleSettingChange}
         />
       ))}

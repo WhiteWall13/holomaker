@@ -81,10 +81,9 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
 
     setFiles(reorderedFiles);
   };
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Box sx={{ width: '33%', padding: '10px', borderRight: '1px solid grey', overflow: 'auto' }}>
+      <Box sx={{ width: '33%', padding: '10px', borderRight: '1px solid grey' }}>
         <h2>Files</h2>
         <label htmlFor="upload-button">
           <Button variant="contained" color="primary" component="span">
@@ -111,31 +110,33 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
         >
           <p>Drag and drop authorized files here</p>
         </Box>
-        <Droppable droppableId="files">
-          {(provided) => (
-            <List {...provided.droppableProps} ref={provided.innerRef}>
-              {files.map((file, index) => (
-                <Draggable key={file.id} draggableId={file.id} index={index}>
-                  {(provided) => (
-                    <ListItem
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      selected={selectedFile === file}
-                      onClick={() => handleFileSelect(file)}
-                    >
-                      {file.name}
-                    </ListItem>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </List>
-          )}
-        </Droppable>
+        <Box sx={{ maxHeight: '290px', overflow: 'auto' }}>
+          <Droppable droppableId="files">
+            {(provided) => (
+              <List {...provided.droppableProps} ref={provided.innerRef}>
+                {files.map((file, index) => (
+                  <Draggable key={file.id} draggableId={file.id} index={index}>
+                    {(provided) => (
+                      <ListItem
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        selected={selectedFile === file}
+                        onClick={() => handleFileSelect(file)}
+                      >
+                        {file.name}
+                      </ListItem>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </List>
+            )}
+          </Droppable>
+        </Box>
       </Box>
     </DragDropContext>
-  );
+  );  
 };
 
 export default FileZone;
