@@ -8,7 +8,7 @@ const FileInput = styled('input')`
   display: none;
 `;
 
-const FileZone = ({ onFileSelect, onFileDelete }) => {
+const FileZone = ({ onFileSelect, onFileDelete, onFileReorder }) => {
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -16,7 +16,7 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
     const newFiles = [
       ...files,
       ...Array.from(uploadedFiles).map((file) => ({
-        id: uuidv4(),
+        id: uuidv4(), // generate a new UUID for each uploaded file
         name: file.name,
         size: file.size,
         type: file.type,
@@ -26,7 +26,7 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
     if (uploadedFiles.length > 0) {
       onFileSelect(newFiles[0]);
     }
-  };
+  };  
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -80,7 +80,9 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
     reorderedFiles.splice(result.destination.index, 0, removed);
 
     setFiles(reorderedFiles);
+    onFileReorder(reorderedFiles); // Call onFileReorder after reordering files
   };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Box sx={{ width: '33%', padding: '10px', borderRight: '1px solid grey' }}>
@@ -136,7 +138,7 @@ const FileZone = ({ onFileSelect, onFileDelete }) => {
         </Box>
       </Box>
     </DragDropContext>
-  );  
+  );
 };
 
 export default FileZone;
